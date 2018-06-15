@@ -1,0 +1,26 @@
+version: "2"
+services:
+  mongotest:
+    image: mongo:latest
+    container_name: "mongotest"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+#      - MONGO_LOG_DIR=/dev/null
+#      - MONGODB_USER="admin" 
+#      - MONGODB_PASS="admin"
+    volumes:
+      - /home/olegich/taskFromMichael/mongo/data/db:/data/db
+    ports:
+      - 13062:13062
+    command: mongod --smallfiles --logpath=/dev/null
+
+  nodejs:
+    build: ./nodejs
+    volumes: 
+      - ./nodejs:/usr/src/app
+    links:
+      - mongotest
+    ports:
+      - 13061:13061
+    depends_on:
+      - mongotest

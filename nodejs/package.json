@@ -1,0 +1,13 @@
+{
+  "name": "taskFromMichael",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Oleh Bilous",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "~4.14.0",
+    "mongoose": "~4.13.1"
+  }
+}

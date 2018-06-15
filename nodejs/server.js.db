@@ -1,0 +1,35 @@
+'use strict';
+
+var express = require('express');
+
+// Constants
+const PORT = 3000;
+const HOST = '0.0.0.0';
+
+// App
+var app = express();
+app.get('/', (req, res) => {
+  res.send('Task from Michael\nReadrecords from MongoDB:\n');
+});
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://db:37017/test';
+
+MongoClient.connect(url, function(err, db) {
+
+    var cursor = db.collection('PayRollColl').find();
+
+    cursor.each(function(err, doc) {
+
+        app.get('/', (req, res) => {
+          res.send(doc);
+        });
+
+
+//        console.log(doc);
+
+    });
+}); 
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
